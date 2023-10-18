@@ -8,10 +8,15 @@ export default function Home() {
   const [isRun, setIsRun] = useState(false);
 
 
-  let [stimulation_list, setStimulation_list] = useState<string[]>([]);
-  let [ability_list, setAbility_list] = useState<string[]>([]);
-  let [background_list, setBackground_list] = useState<string[]>([]);
-  let [genre_list, setGenre_list] = useState<string[]>([]);
+  const [stimulation_list, setStimulation_list] = useState<string[]>([]);
+  const [ability_list, setAbility_list] = useState<string[]>([]);
+  const [background_list, setBackground_list] = useState<string[]>([]);
+  const [genre_list, setGenre_list] = useState<string[]>([]);
+
+  const [stimulation, setStimulation] = useState("none");
+  const [ability, setAbility] = useState("none");
+  const [background, setBackground] = useState("none");
+  const [genre, setGenre] = useState("none");
 
   // title, stimulation1/stimulation2, ability, background, genre
   const textRef = useRef<HTMLTextAreaElement>(null);
@@ -43,43 +48,45 @@ export default function Home() {
           data_list.push(game);
         }
         console.log(data_list);
+
+
+        setGames(data_list);
+
+
+        let stimulation_temp = ["none"];
+        let ability_temp = ["none"];
+        let background_temp = ["none"];
+        let genre_temp = ["none"];
+
+
+
+        for (let i = 0; i < data_list.length; i++) {
+          const temp = data_list[i];
+          if (!stimulation_temp.includes(temp.stimulation[0])) stimulation_temp.push(temp.stimulation[0]);
+          if (!stimulation_temp.includes(temp.stimulation[1])) stimulation_temp.push(temp.stimulation[1]);
+          if (!ability_temp.includes(temp.ability)) ability_temp.push(temp.ability);
+          if (!background_temp.includes(temp.background)) background_temp.push(temp.background);
+          if (!genre_temp.includes(temp.genre)) genre_temp.push(temp.genre);
+        }
+
+        setStimulation_list(stimulation_temp);
+        setAbility_list(ability_temp);
+        setBackground_list(background_temp);
+        setGenre_list(genre_temp);
+
+        setStimulation("none");
+        setAbility("none");
+        setBackground("none");
+        setGenre("none");
+
+        setIsRun(true);
       }
-
-      setGames(data_list);
-
-
-      let stimulation_temp = ["none"];
-      let ability_temp = ["none"];
-      let background_temp = ["none"];
-      let genre_temp = ["none"];
-
-
-
-      for (let i = 0; i < data_list.length; i++) {
-        const temp = data_list[i];
-        if (!stimulation_temp.includes(temp.stimulation[0])) stimulation_temp.push(temp.stimulation[0]);
-        if (!stimulation_temp.includes(temp.stimulation[1])) stimulation_temp.push(temp.stimulation[1]);
-        if (!ability_temp.includes(temp.ability)) ability_temp.push(temp.ability);
-        if (!background_temp.includes(temp.background)) background_temp.push(temp.background);
-        if (!genre_temp.includes(temp.genre)) genre_temp.push(temp.genre);
-      }
-
-      setStimulation_list(stimulation_temp);
-      setAbility_list(ability_temp);
-      setBackground_list(background_temp);
-      setGenre_list(genre_temp);
-
-      setIsRun(true);
     }
   }
 
 
 
 
-  const [stimulation, setStimulation] = useState("none");
-  const [ability, setAbility] = useState("none");
-  const [background, setBackground] = useState("none");
-  const [genre, setGenre] = useState("none");
 
   const handlerStimulationChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setStimulation(e.target.value);
@@ -94,19 +101,19 @@ export default function Home() {
     setGenre(e.target.value);
   }
 
-  useEffect(() => {
-    console.log("Stimulation: ", stimulation);
-    console.log("Ability: ", ability);
-    console.log("Background: ", background);
-    console.log("Genre: ", genre);
-    console.log("-----------------------------");
-  }, [stimulation, ability, background, genre]);
+  // useEffect(() => {
+  //   console.log("Stimulation: ", stimulation);
+  //   console.log("Ability: ", ability);
+  //   console.log("Background: ", background);
+  //   console.log("Genre: ", genre);
+  //   console.log("-----------------------------");
+  // }, [stimulation, ability, background, genre]);
 
   return (
     <main className={styles.root}>
       <div className={styles.container}>
         <div className={`${styles.textwrap} ${isRun ? null : styles.active}`}>
-          <textarea ref={textRef} className={styles.text} placeholder='title, stimulation1/stimulation2, ability, background, genre'></textarea>
+          <textarea ref={textRef} className={styles.text} placeholder='title,stimulation1/stimulation2,ability,background,genre'></textarea>
         </div>
         <button className={styles.button} onClick={click}>{isRun ? "Edit List" : "Run"}</button>
         <div className={`${styles.run} ${isRun ? styles.active : null}`}>
