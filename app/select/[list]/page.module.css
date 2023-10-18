@@ -1,9 +1,0 @@
-.control{
-  display: flex;
-  align-items: center;
-}
-
-.control select{
-  height: 20px;
-  margin-right: 40px;
-}
