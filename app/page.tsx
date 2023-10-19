@@ -120,7 +120,7 @@ export default function Home() {
         </div>
         <button className={styles.button} onClick={click}>{isRun ? "Edit List" : "Run"}</button>
         <div className={`${styles.run} ${isRun ? styles.active : null}`}>
-          <div className={styles.main}>
+          <div className={styles.runwrap}>
             <div className={styles.control}>
               <div className={styles.unit}>
                 <h3>자극</h3>

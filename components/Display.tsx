@@ -29,7 +29,7 @@ export default function Display({data, stimulation, ability, background, genre }
     <div>
       {
         filter.map((item, index) => {
-          return <div key={index}>{item.name}</div>
+          return <p key={index}>{item.name}</p>
         })
       }
     </div>
