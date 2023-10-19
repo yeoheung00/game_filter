@@ -13,10 +13,10 @@ export default function Home() {
   const [background_list, setBackground_list] = useState<string[]>([]);
   const [genre_list, setGenre_list] = useState<string[]>([]);
 
-  const [stimulation, setStimulation] = useState("none");
-  const [ability, setAbility] = useState("none");
-  const [background, setBackground] = useState("none");
-  const [genre, setGenre] = useState("none");
+  const [stimulation, setStimulation] = useState("X");
+  const [ability, setAbility] = useState("X");
+  const [background, setBackground] = useState("X");
+  const [genre, setGenre] = useState("X");
 
   // title, stimulation1/stimulation2, ability, background, genre
   const textRef = useRef<HTMLTextAreaElement>(null);
@@ -53,10 +53,10 @@ export default function Home() {
         setGames(data_list);
 
 
-        let stimulation_temp = ["none"];
-        let ability_temp = ["none"];
-        let background_temp = ["none"];
-        let genre_temp = ["none"];
+        let stimulation_temp = ["X"];
+        let ability_temp = ["X"];
+        let background_temp = ["X"];
+        let genre_temp = ["X"];
 
 
 
@@ -85,10 +85,10 @@ export default function Home() {
         setBackground_list(background_temp);
         setGenre_list(genre_temp);
 
-        setStimulation("none");
-        setAbility("none");
-        setBackground("none");
-        setGenre("none");
+        setStimulation("X");
+        setAbility("X");
+        setBackground("X");
+        setGenre("X");
 
         setIsRun(true);
       }
