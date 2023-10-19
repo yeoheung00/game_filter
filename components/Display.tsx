@@ -5,22 +5,28 @@ type PropsType = {
   stimulation: string,
   ability: string,
   background: string,
-  genre: string
+  genre: string,
+  platform: string
 }
 type GameType = {
   name: string,
   stimulation: string[],
   ability: string[],
   background: string[],
-  genre: string[]
+  genre: string[],
+  platform: string[]
 }
 
-export default function Display({data, stimulation, ability, background, genre }: PropsType) {
+export default function Display({ data, stimulation, ability, background, genre, platform }: PropsType) {
   console.log('data', data);
   let filter = [];
   for (let i = 0; i < data.length; i++) {
     const temp = data[i];
-    if ((temp.stimulation.includes(stimulation) || stimulation == "none") && (temp.ability.includes(ability) || ability == "none") && (temp.background.includes(background) || background == "none") && (temp.genre.includes(genre) || genre == "none")) {
+    if ((temp.stimulation.includes(stimulation) || stimulation == "X") &&
+      (temp.ability.includes(ability) || ability == "X") &&
+      (temp.background.includes(background) || background == "X") &&
+      (temp.genre.includes(genre) || genre == "X") &&
+      (temp.platform.includes(platform) || platform == "X")) {
       filter.push(temp);
     }
   }

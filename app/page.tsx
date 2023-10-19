@@ -12,11 +12,13 @@ export default function Home() {
   const [ability_list, setAbility_list] = useState<string[]>([]);
   const [background_list, setBackground_list] = useState<string[]>([]);
   const [genre_list, setGenre_list] = useState<string[]>([]);
+  const [platform_list, setPlatform_list] = useState<string[]>([]);
 
   const [stimulation, setStimulation] = useState("X");
   const [ability, setAbility] = useState("X");
   const [background, setBackground] = useState("X");
   const [genre, setGenre] = useState("X");
+  const [platform, setPlatform] = useState("X");
 
   // title, stimulation1/stimulation2, ability, background, genre
   const textRef = useRef<HTMLTextAreaElement>(null);
@@ -25,7 +27,8 @@ export default function Home() {
     stimulation: string[],
     ability: string[],
     background: string[],
-    genre: string[]
+    genre: string[],
+    platform: string[]
   }
   const [games, setGames] = useState<GameType[]>([]);
   let data_list: GameType[] = [];
@@ -45,6 +48,7 @@ export default function Home() {
           game.ability = data[2].split("/");
           game.background = data[3].split("/");
           game.genre = data[4].split("/");
+          game.platform = data[5].split("/");
           data_list.push(game);
         }
         console.log(data_list);
@@ -57,6 +61,7 @@ export default function Home() {
         let ability_temp = ["X"];
         let background_temp = ["X"];
         let genre_temp = ["X"];
+        let platform_temp = ["x"];
 
 
 
@@ -74,6 +79,9 @@ export default function Home() {
           for(let j=0; j<temp.genre.length; j++){
             if(!genre_temp.includes(temp.genre[j])) genre_temp.push(temp.genre[j]);
           }
+          for(let j=0; j<temp.platform.length; j++){
+            if(!platform_temp.includes(temp.platform[j])) platform_temp.push(temp.platform[j]);
+          }
           // if (!stimulation_temp.includes(temp.stimulation[0])) stimulation_temp.push(temp.stimulation[0]);
           // if (!ability_temp.includes(temp.ability)) ability_temp.push(temp.ability);
           // if (!background_temp.includes(temp.background)) background_temp.push(temp.background);
@@ -84,11 +92,13 @@ export default function Home() {
         setAbility_list(ability_temp);
         setBackground_list(background_temp);
         setGenre_list(genre_temp);
+        setPlatform_list(platform_temp);
 
         setStimulation("X");
         setAbility("X");
         setBackground("X");
         setGenre("X");
+        setPlatform("X");
 
         setIsRun(true);
       }
@@ -111,12 +121,15 @@ export default function Home() {
   const handlerGenreChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setGenre(e.target.value);
   }
+  const handlerPlatformChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    setPlatform(e.target.value);
+  }
 
   return (
     <main className={styles.root}>
       <div className={styles.container}>
         <div className={`${styles.textwrap} ${isRun ? null : styles.active}`}>
-          <textarea ref={textRef} className={styles.text} placeholder='title,stimulation1/stimulation2,ability,background,genre'></textarea>
+          <textarea ref={textRef} className={styles.text} placeholder='title,stimulation,ability,background,genre,platform'></textarea>
         </div>
         <button className={styles.button} onClick={click}>{isRun ? "Edit List" : "Run"}</button>
         <div className={`${styles.run} ${isRun ? styles.active : null}`}>
@@ -162,10 +175,20 @@ export default function Home() {
                   }
                 </select>
               </div>
+              <div className={styles.unit}>
+                <h3>플랫폼</h3>
+                <select onChange={handlerPlatformChange} value={platform}>
+                  {
+                    platform_list.map((item, index) => {
+                      return <option key={index}>{item}</option>
+                    })
+                  }
+                </select>
+              </div>
             </div>
             <div className={styles.divider}/>
             <div className={styles.display}>
-              <Display data={games} stimulation={stimulation} ability={ability} background={background} genre={genre} />
+              <Display data={games} stimulation={stimulation} ability={ability} background={background} genre={genre} platform={platform} />
             </div>
           </div>
         </div>
