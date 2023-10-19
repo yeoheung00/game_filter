@@ -38,7 +38,7 @@ export default function Home() {
       if (textRef.current) {
         const game_list = textRef.current.value.split('\n');
         for (let i = 0; i < game_list.length; i++) {
-          const data = game_list[i].split(",");
+          const data = game_list[i].split("\t");
           const game = new Object() as GameType;
           game.name = data[0];
           game.stimulation = data[1].split("/");
