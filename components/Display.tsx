@@ -10,9 +10,9 @@ type PropsType = {
 type GameType = {
   name: string,
   stimulation: string[],
-  ability: string,
-  background: string,
-  genre: string
+  ability: string[],
+  background: string[],
+  genre: string[]
 }
 
 export default function Display({data, stimulation, ability, background, genre }: PropsType) {
@@ -20,7 +20,7 @@ export default function Display({data, stimulation, ability, background, genre }
   let filter = [];
   for (let i = 0; i < data.length; i++) {
     const temp = data[i];
-    if ((temp.stimulation.includes(stimulation) || stimulation == "none") && (temp.ability == ability || ability == "none") && (temp.background == background || background == "none") && (temp.genre == genre || genre == "none")) {
+    if ((temp.stimulation.includes(stimulation) || stimulation == "none") && (temp.ability.includes(ability) || ability == "none") && (temp.background.includes(background) || background == "none") && (temp.genre.includes(genre) || genre == "none")) {
       filter.push(temp);
     }
   }

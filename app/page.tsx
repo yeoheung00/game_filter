@@ -23,9 +23,9 @@ export default function Home() {
   type GameType = {
     name: string,
     stimulation: string[],
-    ability: string,
-    background: string,
-    genre: string
+    ability: string[],
+    background: string[],
+    genre: string[]
   }
   const [games, setGames] = useState<GameType[]>([]);
   let data_list: GameType[] = [];
@@ -38,13 +38,13 @@ export default function Home() {
       if (textRef.current) {
         const game_list = textRef.current.value.split('\n');
         for (let i = 0; i < game_list.length; i++) {
-          const data = game_list[i].split("\t");
+          const data = game_list[i].split(",");
           const game = new Object() as GameType;
           game.name = data[0];
           game.stimulation = data[1].split("/");
-          game.ability = data[2];
-          game.background = data[3];
-          game.genre = data[4];
+          game.ability = data[2].split("/");
+          game.background = data[3].split("/");
+          game.genre = data[4].split("/");
           data_list.push(game);
         }
         console.log(data_list);
@@ -62,11 +62,22 @@ export default function Home() {
 
         for (let i = 0; i < data_list.length; i++) {
           const temp = data_list[i];
-          if (!stimulation_temp.includes(temp.stimulation[0])) stimulation_temp.push(temp.stimulation[0]);
-          if (!stimulation_temp.includes(temp.stimulation[1])) stimulation_temp.push(temp.stimulation[1]);
-          if (!ability_temp.includes(temp.ability)) ability_temp.push(temp.ability);
-          if (!background_temp.includes(temp.background)) background_temp.push(temp.background);
-          if (!genre_temp.includes(temp.genre)) genre_temp.push(temp.genre);
+          for(let j=0; j<temp.stimulation.length; j++){
+            if(!stimulation_temp.includes(temp.stimulation[j])) stimulation_temp.push(temp.stimulation[j]);
+          }
+          for(let j=0; j<temp.ability.length; j++){
+            if(!ability_temp.includes(temp.ability[j])) ability_temp.push(temp.ability[j]);
+          }
+          for(let j=0; j<temp.background.length; j++){
+            if(!background_temp.includes(temp.background[j])) background_temp.push(temp.background[j]);
+          }
+          for(let j=0; j<temp.genre.length; j++){
+            if(!genre_temp.includes(temp.genre[j])) genre_temp.push(temp.genre[j]);
+          }
+          // if (!stimulation_temp.includes(temp.stimulation[0])) stimulation_temp.push(temp.stimulation[0]);
+          // if (!ability_temp.includes(temp.ability)) ability_temp.push(temp.ability);
+          // if (!background_temp.includes(temp.background)) background_temp.push(temp.background);
+          // if (!genre_temp.includes(temp.genre)) genre_temp.push(temp.genre);
         }
 
         setStimulation_list(stimulation_temp);
