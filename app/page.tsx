@@ -101,14 +101,6 @@ export default function Home() {
     setGenre(e.target.value);
   }
 
-  // useEffect(() => {
-  //   console.log("Stimulation: ", stimulation);
-  //   console.log("Ability: ", ability);
-  //   console.log("Background: ", background);
-  //   console.log("Genre: ", genre);
-  //   console.log("-----------------------------");
-  // }, [stimulation, ability, background, genre]);
-
   return (
     <main className={styles.root}>
       <div className={styles.container}>
@@ -119,39 +111,48 @@ export default function Home() {
         <div className={`${styles.run} ${isRun ? styles.active : null}`}>
           <div className={styles.main}>
             <div className={styles.control}>
-              <h3>자극</h3>
-              <select onChange={handlerStimulationChange} value={stimulation}>
-                {
-                  stimulation_list.map((item, index) => {
-                    return <option key={index}>{item}</option>
-                  })
-                }
-              </select>
-              <h3>능력</h3>
-              <select onChange={handlerAbilityChange} value={ability}>
-                {
-                  ability_list.map((item, index) => {
-                    return <option key={index}>{item}</option>
-                  })
-                }
-              </select>
-              <h3>배경</h3>
-              <select onChange={handlerBackgroundChange} value={background}>
-                {
-                  background_list.map((item, index) => {
-                    return <option key={index}>{item}</option>
-                  })
-                }
-              </select>
-              <h3>장르</h3>
-              <select onChange={handlerGenreChange} value={genre}>
-                {
-                  genre_list.map((item, index) => {
-                    return <option key={index}>{item}</option>
-                  })
-                }
-              </select>
+              <div className={styles.unit}>
+                <h3>자극</h3>
+                <select onChange={handlerStimulationChange} value={stimulation}>
+                  {
+                    stimulation_list.map((item, index) => {
+                      return <option key={index}>{item}</option>
+                    })
+                  }
+                </select>
+              </div>
+              <div className={styles.unit}>
+                <h3>능력</h3>
+                <select onChange={handlerAbilityChange} value={ability}>
+                  {
+                    ability_list.map((item, index) => {
+                      return <option key={index}>{item}</option>
+                    })
+                  }
+                </select>
+              </div>
+              <div className={styles.unit}>
+                <h3>배경</h3>
+                <select onChange={handlerBackgroundChange} value={background}>
+                  {
+                    background_list.map((item, index) => {
+                      return <option key={index}>{item}</option>
+                    })
+                  }
+                </select>
+              </div>
+              <div className={styles.unit}>
+                <h3>장르</h3>
+                <select onChange={handlerGenreChange} value={genre}>
+                  {
+                    genre_list.map((item, index) => {
+                      return <option key={index}>{item}</option>
+                    })
+                  }
+                </select>
+              </div>
             </div>
+            <div className={styles.divider}/>
             <div className={styles.display}>
               <Display data={games} stimulation={stimulation} ability={ability} background={background} genre={genre} />
             </div>

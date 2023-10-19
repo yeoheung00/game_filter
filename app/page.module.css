@@ -1,6 +1,8 @@
 .root{
   width: 100vw;
   height: 100vh;
+  background-color: #d2d7e7;
+  padding: 0 10px;
 }
 
 .container{
@@ -12,44 +14,86 @@
 
 .textwrap.active{
   flex: 1;
-  display: flex;
 }
 
 .textwrap{
   height: 0px;
   flex: none;
   overflow: hidden;
+  transition: 0.3s;
+  border-radius: 8px;
 }
 
 .text{
-  margin: 0;
+  margin-top: 10px;
+  width: 100%;
+  height: calc(100% - 10px);
+  outline: none;
   padding: 10px;
-  flex: 1;
+  border: none;
   resize: none;
+  transition: 0.3s;
+  border-radius: 8px;
 }
 
 .button{
-  height: 40px;
-  line-height: 40px;
+  margin: 10px 0;
+  height: 60px;
+  line-height: 60px;
   text-align: center;
-  background-color: gray;
+  background-color: #83a9db;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: larger;
+}
+
+.button:hover{
+  background-color: #6889b3;
+
 }
 
 .run.active{
   flex: 1;
+  padding: 0;
 }
 
 .run{
   flex: 0;
   height: 0px;
+  transition: 0.3s;
   overflow: hidden;
+  border-radius: 8px;
+  background-color: white;
+  margin-bottom: 10px;
 }
 .control{
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 50px;
+  padding: 10px 0;
 }
 
 .control select{
   height: 20px;
-  margin-right: 40px;
+}
+
+.unit{
+  display: flex;
+}
+
+.unit h3{
+  margin-right: 10px;
+}
+
+.divider{
+  width: 100%;
+  height: 2px;
+  background-color: #83a9db;
+}
+
+.display{
+  padding: 10px;
 }
