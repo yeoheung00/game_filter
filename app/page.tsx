@@ -67,20 +67,20 @@ export default function Home() {
 
         for (let i = 0; i < data_list.length; i++) {
           const temp = data_list[i];
-          for(let j=0; j<temp.stimulation.length; j++){
-            if(!stimulation_temp.includes(temp.stimulation[j])) stimulation_temp.push(temp.stimulation[j]);
+          for (let j = 0; j < temp.stimulation.length; j++) {
+            if (!stimulation_temp.includes(temp.stimulation[j])) stimulation_temp.push(temp.stimulation[j]);
           }
-          for(let j=0; j<temp.ability.length; j++){
-            if(!ability_temp.includes(temp.ability[j])) ability_temp.push(temp.ability[j]);
+          for (let j = 0; j < temp.ability.length; j++) {
+            if (!ability_temp.includes(temp.ability[j])) ability_temp.push(temp.ability[j]);
           }
-          for(let j=0; j<temp.background.length; j++){
-            if(!background_temp.includes(temp.background[j])) background_temp.push(temp.background[j]);
+          for (let j = 0; j < temp.background.length; j++) {
+            if (!background_temp.includes(temp.background[j])) background_temp.push(temp.background[j]);
           }
-          for(let j=0; j<temp.genre.length; j++){
-            if(!genre_temp.includes(temp.genre[j])) genre_temp.push(temp.genre[j]);
+          for (let j = 0; j < temp.genre.length; j++) {
+            if (!genre_temp.includes(temp.genre[j])) genre_temp.push(temp.genre[j]);
           }
-          for(let j=0; j<temp.platform.length; j++){
-            if(!platform_temp.includes(temp.platform[j])) platform_temp.push(temp.platform[j]);
+          for (let j = 0; j < temp.platform.length; j++) {
+            if (!platform_temp.includes(temp.platform[j])) platform_temp.push(temp.platform[j]);
           }
           // if (!stimulation_temp.includes(temp.stimulation[0])) stimulation_temp.push(temp.stimulation[0]);
           // if (!ability_temp.includes(temp.ability)) ability_temp.push(temp.ability);
@@ -103,7 +103,41 @@ export default function Home() {
         setIsRun(true);
       }
     }
+    const name = 'project_list'; //파일명
+    downloadFile({
+      data: JSON.stringify(data_list),
+      fileName: `${name}.json`,
+      fileType: 'text/json',
+    });
   }
+
+
+  type datatype = {
+    name: string,
+    stimulation: string[],
+    ability: string[],
+    background: string[],
+    genre: string[],
+    platform: string[]
+  };
+
+  const downloadFile = async ({ data, fileName, fileType }: {data:any, fileName:any, fileType:any}) => {
+    //파일로 다운로드할 데이터로 Blob를 만든다 [Blob이란? (Binary Large Object, 블랍) 이미지, 사운드, 비디오와 같은 멀티미디어 데이터를 다룰 때 사용]
+    const blob = new Blob([data], { type: fileType });
+    // a태그를 생성하고 해당 요소에 클릭 이벤트를 보낸다
+    // 다운로드를 한다
+    const link = document.createElement('a');
+    link.download = fileName;
+    link.href = await URL.createObjectURL(blob);
+
+    const clickEvt = new MouseEvent('click', {
+      view: window,
+      bubbles: true,
+      cancelable: true,
+    });
+    link.dispatchEvent(clickEvt);
+    link.remove();
+  };
 
 
 
@@ -186,7 +220,7 @@ export default function Home() {
                 </select>
               </div>
             </div>
-            <div className={styles.divider}/>
+            <div className={styles.divider} />
             <div className={styles.display}>
               <Display data={games} stimulation={stimulation} ability={ability} background={background} genre={genre} platform={platform} />
             </div>
